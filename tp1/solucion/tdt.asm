@@ -88,21 +88,23 @@ tdt_agregarBloque:
 ; =====================================
 ; void tdt_agregarBloques(tdt* tabla, bloque** b)
 tdt_agregarBloques:
-	push rbx
-	xor rbx, rbx
-	.ciclo:
-	push rsi
-	cmp QWORD [rsi+rbx*8], 0
-	je .fin
-	mov r10, [rsi+rbx*8]
-	mov rsi, r10
-	call tdt_agregarBloque
-	pop rsi
-	inc rbx
-	jmp .ciclo
-	.fin:
-	pop rbx
-	ret
+  push rbx
+  mov rbx, 0 
+  .ciclo:
+  push rsi
+  cmp QWORD [rsi+rbx], 0
+  je .fin
+  mov rsi, [rsi+rbx]
+  sub rsp, 8
+  call tdt_agregarBloque
+  add rsp, 8
+  pop rsi
+  add rbx, 8
+  jmp .ciclo
+  .fin:
+  pop rsi
+  pop rbx
+  ret
 
 ; =====================================
 ; void tdt_borrarBloque(tdt* tabla, bloque* b)
@@ -112,21 +114,21 @@ tdt_borrarBloque:
 ; =====================================
 ; void tdt_borrarBloques(tdt* tabla, bloque** b)
 tdt_borrarBloques:
-	push rbx
-	xor rbx, rbx
-	.ciclo:
+  push rbx
+	mov rbx, 0 
+  .ciclo:
 	push rsi
-	cmp QWORD [rsi+rbx*8], 0
+	cmp QWORD [rsi+rbx], 0
 	je .fin
-	mov r10, [rsi+rbx*8]
-	mov rsi, r10
-	sub rbp, 8
+	mov rsi, [rsi+rbx]
+	sub rsp, 8
 	call tdt_borrarBloque
-	add rbp, 8
+	add rsp, 8
 	pop rsi
-	inc rbx
+	add rbx, 8
 	jmp .ciclo
 	.fin:
+  pop rsi
 	pop rbx
 	ret
 
@@ -171,19 +173,23 @@ tdt_traducirBloque:
 ; =====================================
 ; void tdt_traducirBloques(tdt* tabla, bloque** b)
 tdt_traducirBloques:
-	xor rcx, rcx
-	.ciclo:
-	push rsi
-	cmp QWORD [rsi+rcx*8], 0
-	je .fin
-	mov r10, [rsi+rcx*8]
-	mov rsi, r10
-	call tdt_traducirBloque
-	pop rsi
-	inc rcx
-	jmp .ciclo
-	.fin:
-	ret
+  push rbx
+  mov rbx, 0 
+  .ciclo:
+  push rsi
+  cmp QWORD [rsi+rbx], 0
+  je .fin
+  mov rsi, [rsi+rbx]
+  sub rsp, 8
+  call tdt_traducirBloque
+  add rsp, 8
+  pop rsi
+  add rbx, 8
+  jmp .ciclo
+  .fin:
+  pop rsi
+  pop rbx
+  ret
 		
 ; =====================================
 ; void tdt_destruir(tdt** tabla)

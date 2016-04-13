@@ -94,7 +94,6 @@ void tdt_imprimirTraducciones(tdt* tabla, FILE *pFile) {
 			i++;
 		}
 	}
-	fprintf(pFile, "\n\n");
 }
 
 maxmin* tdt_obtenerMaxMin(tdt* tabla) {
@@ -144,9 +143,6 @@ maxmin* tdt_obtenerMaxMin(tdt* tabla) {
 			if (i==255) r=1;
 			i++;
 		} 
-	}else{
-	for(int u=0;u<15;u++) obj->min_valor[u]=0;
-	for(int u=0;u<15;u++) obj->max_valor[u]=255;
 	}
 	return obj;
 }
